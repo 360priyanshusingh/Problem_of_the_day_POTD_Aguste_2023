@@ -1,0 +1,20 @@
+void dfs(vector<int> &ans,int node, vector<bool> &visited, vector<int> adj[]){
+        if(visited[node]==true) false;
+        // cout<<node<<" ";
+         ans.push_back(node);
+         visited[node]=true;
+        for(auto a:adj[node]){
+            if(node==a || visited[a]) continue;
+            dfs(ans,a,visited,adj);
+        }
+        
+    }
+    vector<int> dfsOfGraph(int v, vector<int> adj[]) {
+        // Code here
+        vector<int> ans;
+        vector<bool> visited(v,false);
+        dfs(ans,0,visited,adj);
+        
+        return ans;
+        
+    }
