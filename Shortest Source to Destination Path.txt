@@ -1,0 +1,41 @@
+int dx[4]={0,1,0,-1};
+    int dy[4]={1,0,-1,0};
+    int Bfs(int N,int M,int i,int j,vector<vector<int>> &A,int X,int Y,vector<vector<int>> &v){
+        if(i==X && j==Y) return 0;
+       queue<pair<int,pair<int,int>>> pq;
+       pq.push({0,{0,0}});
+    
+       int ans=1e9;
+       while(!pq.empty()){
+           
+            int step=pq.front().first;
+            int i=pq.front().second.first;
+            int j=pq.front().second.second;
+            pq.pop();
+            if( i==X && j==Y) return step;
+            
+            for(int k=0;k<4;k++){
+            int row=i+dx[k];
+            int col=j+dy[k];
+            
+            if(row>=0  &&  col>=0 && N>row && M>col && A[row][col]==1 &&  v[row][col]==0){
+                pq.push({step+1,{row,col}}) ;
+                v[row][col]=1;
+            }
+        }
+        
+       }
+        
+        return ans;
+        
+        
+    }
+    
+    int shortestDistance(int N, int M, vector<vector<int>> &A, int X, int Y) {
+        vector<vector<int>> v(N,vector<int> (M,0));
+        // code here
+        if(A[0][0]==0 || A[X][Y]==0) return -1;
+        if(X==N && Y==M)  return 0;
+        int ans=Bfs(N,M,0,0,A,X,Y,v);
+        return  ans==1e9? -1 : ans ;
+    }
