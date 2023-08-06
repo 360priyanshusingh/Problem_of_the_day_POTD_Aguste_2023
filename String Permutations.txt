@@ -1,0 +1,24 @@
+void dfs(string &S ,vector<string> &ans,int index){
+        int n=S.size();
+        if(S.size()==index) {
+            ans.push_back(S);
+            return ;
+        }
+        
+        for(int i=index;i<n;i++){
+            swap(S[index],S[i]);
+            dfs(S,ans,index+1);
+            swap(S[index],S[i]);
+        }
+        
+        
+    }
+    
+    vector<string> permutation(string S)
+    {
+        //Your code here  
+         vector<string> ans;
+         dfs(S,ans,0);
+         sort(ans.begin(),ans.end());
+        return ans;
+    }
