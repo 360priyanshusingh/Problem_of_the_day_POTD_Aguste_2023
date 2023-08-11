@@ -1,0 +1,30 @@
+ long long int count(int coins[], int N, int sum) {
+
+        // code here.
+        vector<vector<long long int>> dp(N,vector<long long int> (sum+1,-1));
+        
+        for(int s=0;s<=sum;s++){
+            dp[0][s]=s%coins[0]==0;
+        }
+        
+        for(int i=0;i<N;i++){
+            dp[i][0]=1;
+        }
+        
+        for(int i=1;i<N;i++){
+            for(int s=1;s<=sum;s++){
+                
+                long long int nontake=dp[i-1][s];
+                long long int take=0;
+                
+                if(coins[i] <=s){
+                    take=dp[i][s-coins[i]];
+                }
+                
+                dp[i][s]=take+nontake;
+                
+            } 
+        }
+        
+       return dp[N-1][sum];
+    }
