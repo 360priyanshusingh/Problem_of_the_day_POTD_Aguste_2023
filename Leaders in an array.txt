@@ -1,0 +1,16 @@
+ vector<int> leaders(int a[], int n){
+        // Code here
+         vector<int> ans;
+         int mai=-1;
+
+
+         for(int i=n-1;i>=0;i--){
+             if(mai<=a[i]){
+                 mai=a[i];
+                 ans.push_back(mai);
+             }
+         }
+         
+         reverse(ans.begin(),ans.end());
+         return ans;
+    }
